@@ -4,13 +4,13 @@ using TMPro;
 
 public class Playercontroller : MonoBehaviour
 {
+    public Game_Manager Manager;
     private Rigidbody rb;
     private float movementX;
     private float movementY;
     public float speed = 0; 
     private int Score;
     public TextMeshProUGUI countText;
-    public GameObject winTextObject;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,7 +18,6 @@ public class Playercontroller : MonoBehaviour
         rb = GetComponent <Rigidbody>();
         Score = 0; 
         SetCountText();
-        winTextObject.SetActive(false);
  
     }
 
@@ -52,10 +51,10 @@ public class Playercontroller : MonoBehaviour
     void SetCountText() 
     {
         countText.text =  "Score: " + Score.ToString();
-        if (Score >= 12)
+        if (Score >= 1)
         {
-            winTextObject.SetActive(true);
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+            Manager.Completelevel();
         }
 
     }
@@ -67,8 +66,7 @@ public class Playercontroller : MonoBehaviour
             // Destroy the current object
             Destroy(gameObject); 
             // Update the winText to display "You Lose!"
-            winTextObject.gameObject.SetActive(true);
-            winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
+            FindAnyObjectByType<Game_Manager>().Endgame();
         }
     }
 

@@ -11,8 +11,6 @@ public class PlayerMovementRobot : MonoBehaviour
     Vector3 m_Movement;
     Vector3 m_MovementForward;
 
-    float rotateSpeed = 10f;
-
     Quaternion m_Rotation = Quaternion.identity;
 
     float horizontal;
